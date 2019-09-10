@@ -1,0 +1,67 @@
+{
+  "groups": [
+    {
+      "id": "1",
+      "group_name": "Swimming",
+      "group_description": "when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release."
+    },
+    {
+      "id": "2",
+      "group_name": "Foot Ball",
+      "group_description": "when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release."
+    },
+    {
+      "id": "3",
+      "group_name": "Photography",
+      "group_description": "when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release."
+    }
+  ],
+  "users": [
+    {
+      "user_id": "1",
+      "user_name": "Name of User 1",
+      "group_id": "1"
+    },
+    {
+      "user_id": "2",
+      "user_name": "Name of User 2",
+      "group_id": "1"
+    },
+    {
+      "user_id": "3",
+      "user_name": "Name of User 3",
+      "group_id": "1"
+    },
+
+    {
+      "user_id": "4",
+      "user_name": "Name of User 4",
+      "group_id": "2"
+    },
+    {
+      "user_id": "5",
+      "user_name": "Name of User 5",
+      "group_id": "2"
+    },
+    {
+      "user_id": "6",
+      "user_name": "Name of User 6",
+      "group_id": "1"
+    },
+    {
+      "user_id": "7",
+      "user_name": "Name of User 7",
+      "group_id": "1"
+    },
+    {
+      "user_id": "8",
+      "user_name": "Name of User 8",
+      "group_id": "1"
+    },
+    {
+      "user_id": "9",
+      "user_name": "Name of User 9",
+      "group_id": "1"
+    }
+  ]
+}
