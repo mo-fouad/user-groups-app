@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Jumbotron } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Button, Jumbotron, Row } from "reactstrap";
 
 function WelcomeHeading() {
    return (
@@ -11,10 +12,14 @@ function WelcomeHeading() {
                content or information.
             </p>
             <hr className="my-2" />
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <p className="lead">
-               <Button color="primary">Learn More</Button>
-            </p>
+            <Row>
+               <Button tag={Link} to="/groups" color="primary">
+                  Show All Groups
+               </Button>
+               <Button className="ml-auto" tag={Link} to="/users" color="primary">
+                  Show All Users
+               </Button>
+            </Row>
          </Jumbotron>{" "}
       </div>
    );

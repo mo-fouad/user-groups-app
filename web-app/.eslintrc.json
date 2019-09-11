@@ -37,6 +37,6 @@
         "no-console": "warn",
         "no-unused-vars": "warn",
         "no-eval": "error",
-        "react/prop-types": 1
+        "react/prop-types": 0
     }
 }
