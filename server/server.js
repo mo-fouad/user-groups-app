@@ -9,7 +9,7 @@ const uuid = require("uuid/v1");
 const db = fs.readFileSync("./db/db.json");
 const dbJson = JSON.parse(db);
 
-app.use("/uploads", express.static("public"));
+app.use("/uploads", express.static("uploads"));
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
@@ -21,9 +21,7 @@ io.on("connection", socket => {
   socket.emit("dataUpdated", dbJson);
 
   socket.on("addNewGroup", addNewGroupData => {
-    // console.log(addNewGroupData);
-    addNewGroup(addNewGroupData);
-    // my send user is offline now
+    socket.emit(addNewGroup(addNewGroupData));
   });
 
   socket.on("disconnect", () => {
@@ -32,22 +30,42 @@ io.on("connection", socket => {
 });
 
 // Adding New Group Data
-const addNewGroup = addNewGroupData => {
-  console.log(addNewGroupData);
-  dbJson.groups.push({
-    id: uuid(),
-    group_name: addNewGroupData.group_name,
-    group_description: addNewGroupData.group_description,
-    group_image: addNewGroupData.group_image
-  });
+addNewGroup = addNewGroupData => {
+  // Adding Slug to the Group name .. so it can be used in Routing
+  addNewGroupData.group_slug = addNewGroupData.group_name
+    .toLowerCase()
+    .replace(/ /g, "-");
 
-  //if.writeFile(`${group_name}.jpg`,)
-
-  fs.writeFile("db/db.json", JSON.stringify(dbJson, null, 2), err => {
-    if (err) throw err;
-    console.log("The file has been saved!");
-  });
-  console.log(dbJson);
+  // check if slug is Exists
+  if (
+    dbJson.groups.some(group => {
+      return group.group_slug === addNewGroupData.group_slug;
+    })
+  ) {
+    console.log("GroupAlreadyExits");
+    return "GroupAlreadyExits";
+  } else {
+    dbJson.groups.push({
+      id: uuid(),
+      group_slug: addNewGroupData.group_slug,
+      group_name: addNewGroupData.group_name,
+      group_description: addNewGroupData.group_description,
+      group_image: `http://localhost:4004/uploads/${addNewGroupData.group_slug}.jpg`
+    });
+    fs.writeFileSync(
+      `uploads/${addNewGroupData.group_slug}.jpg`,
+      addNewGroupData.group_image,
+      "base64",
+      function(err) {
+        console.log("err", err);
+      }
+    );
+    fs.writeFileSync("db/db.json", JSON.stringify(dbJson, null, 2), err => {
+      console.log("The file has been saved!");
+    });
+    console.log("GroupHasAdded");
+    return "GroupHasAdded";
+  }
 };
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
